@@ -14,21 +14,21 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { sepolia } from "wagmi/chains";
+import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import Layout from "./components/Layout";
+import FileUploadComponent from "./components/FileUpload.tsx";
 
 // Walet Config
 const { chains, publicClient } = configureChains(
-  // TODO CHANGE TO REQUIRED NETWORK(OPTIONAL)
-  [sepolia],
+  [polygonMumbai],
   [publicProvider()],
 );
 
 const { connectors } = getDefaultWallets({
   // TODO : ADD YOUR PROJECT ID AND APP NAME FROM CONNECT-WALLET
-  appName: "YOUR_PROJECT_NAME",
-  projectId: "YOUR_PROJECT_ID",
+  appName: "bankwallet",
+  projectId: "0e6f568e1144d3f8a278585f3e311bd1",
   chains,
 });
 
@@ -48,6 +48,10 @@ const router = createBrowserRouter([
         index: true,
         element: <App />,
       },
+      {
+        path:'/upload',
+        element:<FileUploadComponent />
+      }
     ],
   },
 ]);

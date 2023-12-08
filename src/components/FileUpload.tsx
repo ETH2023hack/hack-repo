@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
+import lighthouse from '@lighthouse-web3/sdk';
 
 const FileUploadComponent: React.FC = () => {
   const [fileName, setFileName] = useState<string>("");
@@ -14,15 +15,25 @@ const FileUploadComponent: React.FC = () => {
     setFileName(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const progressCallback = (progressData: { total: number, uploaded: number }) => {
+    let percentageDone =
+  100 - parseFloat((progressData?.total / progressData?.uploaded)?.toFixed(2) || '0');
+    console.log(percentageDone)
+  }
+
+  const handleSubmit = async () => {
     // Perform action with selectedFile and fileName
     console.log("File Name:", fileName);
     console.log("Selected File:", selectedFile);
-    // Further processing logic here (e.g., API calls, file handling, etc.)
+    console.log(selectedFile);
+
+    const output = await lighthouse.upload(selectedFile, "307047f7.4798cd5840b04a5ab322cb2ebc6a6b98", false, undefined, progressCallback)
+    console.log('File Status:', output)
   };
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-4">
+    <div className="flex flex-col items-center justify-center space-y-4 min-h-screen">
+      <h1 className="text-3xl font-semibold text-secondary">Upload File</h1>
       <input
         type="text"
         placeholder="Enter file name"
