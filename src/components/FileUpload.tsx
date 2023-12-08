@@ -1,35 +1,49 @@
 import React, { useState, ChangeEvent } from "react";
 
 const FileUploadComponent: React.FC = () => {
-  const [fileName, setFileName] = useState<string>("");
+  const [selectedOption, setSelectedOption] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const options = [
+    { key: 1, value: "10th class" },
+    { key: 2, value: "12th class" },
+    { key: 3, value: "Aadhar card" },
+    { key: 4, value: "Driving license" },
+    { key: 5, value: "B.Tech Degree" },
+  ];
+
+  const handleOptionChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setSelectedOption(e.target.value);
+  };
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setSelectedFile(e.target.files[0]);
+      const file = e.target.files[0];
+      setSelectedFile(file);
     }
   };
 
-  const handleFileNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFileName(e.target.value);
-  };
-
   const handleSubmit = () => {
-    // Perform action with selectedFile and fileName
-    console.log("File Name:", fileName);
+    // Perform action with selectedOption, selectedFile
+    console.log("Selected Option:", selectedOption);
     console.log("Selected File:", selectedFile);
     // Further processing logic here (e.g., API calls, file handling, etc.)
   };
 
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
-      <input
-        type="text"
-        placeholder="Enter file name"
-        value={fileName}
-        onChange={handleFileNameChange}
+      <select
+        value={selectedOption}
+        onChange={handleOptionChange}
         className="border border-gray-300 rounded-md px-3 py-2"
-      />
+      >
+        <option value="">Select an option</option>
+        {options.map((item) => (
+          <option key={item.key} value={item.key}>
+            {item.value}
+          </option>
+        ))}
+      </select>
       <input
         type="file"
         onChange={handleFileChange}

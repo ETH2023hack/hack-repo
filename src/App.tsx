@@ -8,7 +8,7 @@ function App() {
       <h1 className="text-secondary text-9xl font-bold mb-10">veri-fy</h1>
 
       <FileUpload />
-      {}
+
       {/* <ContractRead /> */}
       {/* <ContractWrite /> */}
     </div>
