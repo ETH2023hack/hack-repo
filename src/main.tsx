@@ -18,6 +18,8 @@ import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import Layout from "./components/Layout";
 import FileUploadComponent from "./components/FileUpload.tsx";
+import VerifyCredential from "./components/VerifyCredential.tsx";
+import ViewAllDocs from './components/ViewAllDocs';
 
 // Walet Config
 const { chains, publicClient } = configureChains(
@@ -51,6 +53,14 @@ const router = createBrowserRouter([
       {
         path:'/upload',
         element:<FileUploadComponent />
+      },
+      {
+        path:'/verify',
+        element : <VerifyCredential />
+      },
+      {
+        path:'/viewAllDocs',
+        element: <ViewAllDocs />
       }
     ],
   },

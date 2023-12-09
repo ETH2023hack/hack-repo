@@ -1,22 +1,22 @@
-export const contractAddress = "0x1DFD32DdE270E07C886cd1AfB2fc6aD9c497C9A1";
+export const contractAddress = "0xe3f698DB736F59A1Dc3fc3fB4Ea13835468689f5";
 export const contractABI = [
 	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "documentType",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_ipfsHash",
-				"type": "string"
+				"indexed": false,
+				"internalType": "string[]",
+				"name": "allDocs",
+				"type": "string[]"
 			}
 		],
-		"name": "addIPFSHash",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
+		"name": "AllDocs",
+		"type": "event"
 	},
 	{
 		"anonymous": false,
@@ -24,7 +24,7 @@ export const contractABI = [
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "user",
+				"name": "student",
 				"type": "address"
 			},
 			{
@@ -38,39 +38,111 @@ export const contractABI = [
 				"internalType": "string",
 				"name": "ipfsHash",
 				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "issuer",
+				"type": "address"
 			}
 		],
-		"name": "IPFSHashAdded",
+		"name": "DocumentAdded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "student",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "documentType",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "issuer",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "isVerified",
+				"type": "bool"
+			}
+		],
+		"name": "DocumentVerified",
 		"type": "event"
 	},
 	{
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_user",
+				"name": "_student",
 				"type": "address"
-			}
-		],
-		"name": "getIPFSHashes",
-		"outputs": [
+			},
 			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
+				"internalType": "uint256",
+				"name": "_documentType",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_ipfsHash",
+				"type": "string"
 			}
 		],
-		"stateMutability": "view",
+		"name": "addDocument",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "_issuer",
+				"type": "address"
+			}
+		],
+		"name": "addIssuer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_student",
+				"type": "address"
+			}
+		],
+		"name": "getAllDocumentHashes",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_student",
+				"type": "address"
+			},
+			{
 				"internalType": "uint256",
-				"name": "documentType",
+				"name": "_documentType",
 				"type": "uint256"
 			}
 		],
-		"name": "getMyIPFSHashes",
+		"name": "getDocumentHash",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -80,5 +152,66 @@ export const contractABI = [
 		],
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_student",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_documentType",
+				"type": "uint256"
+			}
+		],
+		"name": "getDocumentIssuer",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_student",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_documentType",
+				"type": "uint256"
+			}
+		],
+		"name": "isDocumentVerified",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	}
-] as const;
+]
